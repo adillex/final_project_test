@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+
+{%block title%}
+{{product.productName}}
+{% endblock %}
+
+{%block body%}
+<div class = "container mt-5">
+    <img src="{{product.photo}}" width="50%" height="50%">
+
+    <div class="alert alert-info">
+        <h1>{{product.productName}}</h1>
+        <h1>{{product.masterId}}</h1>
+        <h3>{{product.masterUserName}}</h3>
+        <h5>{{product.text}}</h5>
+        <h5>{{product.price }}</h5>
+
+
+        <p><b>{{ product.date.date() }}</b></p>
+        {%if product.masterId|int == session.id|int %}
+        <a href="/productProfile/{{product.id}}/delete" class="btn btn-danger">delete</a>
+        <a href="/productProfile/{{product.id}}/redact" class="btn btn-alert">redact</a>
+        {% else %}
+        <a href="/productProfile/{{product.id}}/redact" class="btn btn-alert">request</a>
+        {% endif %}
+    </div>
+</div>
+{%endblock%}
